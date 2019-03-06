@@ -1,0 +1,105 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Baguette Streamers</title>
+    
+    <link rel="stylesheet" href="spectre.min.css">
+    <link rel="stylesheet" href="spectre-exp.min.css">
+    <link rel="stylesheet" href="spectre-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+  <img src="logo.png" alt="Baguette" width="40%" style="max-width: 300px; ">
+   <br>
+   <h2>A streaming community</h2>
+   <br>
+    <h1>
+       
+        <a class="typewrite" data-period="2000" data-type='[ "Hi, we are Baguette.", "We are streamers.", "We love games.", "Come join us." ]'>
+            <span class="wrap"></span>
+        </a>
+    </h1>
+    <br>
+    <h3>GAMERS · STREAMERS · FRIENDS</h3>
+    <br>
+    <a href="https://discord.gg/nTssEhc" class="btn btn-lg" style="background-color: #333333; border-color: #333333; color: #fff"><i class="fab fa-discord fa-sm" style="color: #fff;"></i>  DISCORD</a>
+    <a href="https://www.twitch.tv/baguettefamily" class="btn btn-lg" style="background-color: #333333; border-color: #333333; color: #fff"><i class="fab fa-twitch fa-sm" style="color: #fff;"></i>  TWITCH</a>
+    <a href="https://www.patreon.com/baguette_streamers" class="btn btn-lg" style="background-color: #333333; border-color: #333333; color: #fff"><i class="fab fa-patreon fa-sm" style="color: #fff;"></i>  PATREON</a>
+    <a href="https://goo.gl/forms/giOzAyFA4ypyC7853" class="btn btn-lg" style="background-color: #333333; border-color: #333333; color: #fff"><i class="far fa-edit fa-sm" style="color: #fff;"></i>  APPLY</a>
+    <br><br>
+    <span style="color: #999999; font-size: 0.75rem">Made with <i class="fas fa-heart" style="color: #d92121"></i> & <i class="fas fa-coffee" style="color: #6D4227"></i> in Czech Republic.  </span> 
+    
+    
+    <script type="text/javascript">
+        var TxtType = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtType.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+            var that = this;
+            var delta = 200 - Math.random() * 100;
+
+            if (this.isDeleting) {
+                delta /= 2;
+            }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function() {
+                that.tick();
+            }, delta);
+        };
+
+        window.onload = function() {
+            var elements = document.getElementsByClassName('typewrite');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-type');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtType(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #333333}";
+            document.body.appendChild(css);
+        };
+
+    </script>
+    
+</body>
+
+</html>
